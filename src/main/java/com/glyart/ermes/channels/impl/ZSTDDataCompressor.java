@@ -6,6 +6,8 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
+import java.util.Arrays;
+
 public class ZSTDDataCompressor implements IDataCompressor {
 
     @Override
@@ -24,7 +26,7 @@ public class ZSTDDataCompressor implements IDataCompressor {
         ByteArrayDataInput input = ByteStreams.newDataInput(data);
         int realSize = input.readInt();
         if (realSize == 0)
-            return data;
+            return Arrays.copyOfRange(data, 4, data.length);
 
         int compressedSize = input.readInt();
         byte[] dest = new byte[realSize];

@@ -27,29 +27,29 @@ public class RedisCredentials {
         return port;
     }
 
-    public static final class RedisCredentialsBuilder {
+    public static final class Builder {
         private String hostname;
         private String password;
         private int port;
 
-        private RedisCredentialsBuilder() {
+        private Builder() {
         }
 
-        public static RedisCredentialsBuilder aRedisCredentials() {
-            return new RedisCredentialsBuilder();
+        public static Builder newBuilder() {
+            return new Builder();
         }
 
-        public RedisCredentialsBuilder withHostname(String hostname) {
+        public Builder withHostname(String hostname) {
             this.hostname = hostname;
             return this;
         }
 
-        public RedisCredentialsBuilder withPassword(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public RedisCredentialsBuilder withPort(int port) {
+        public Builder withPort(int port) {
             this.port = port;
             return this;
         }

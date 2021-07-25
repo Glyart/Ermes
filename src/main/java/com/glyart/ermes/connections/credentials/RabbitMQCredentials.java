@@ -33,35 +33,35 @@ public class RabbitMQCredentials {
         return port;
     }
 
-    public static final class RabbitMQCredentialsBuilder {
+    public static final class Builder {
         private String hostname;
         private String username;
         private String password;
         private int port;
 
-        private RabbitMQCredentialsBuilder() {
+        private Builder() {
         }
 
-        public static RabbitMQCredentialsBuilder aRabbitMQCredentials() {
-            return new RabbitMQCredentialsBuilder();
+        public static Builder newBuilder() {
+            return new Builder();
         }
 
-        public RabbitMQCredentialsBuilder withHostname(String hostname) {
+        public Builder withHostname(String hostname) {
             this.hostname = hostname;
             return this;
         }
 
-        public RabbitMQCredentialsBuilder withUsername(String username) {
+        public Builder withUsername(String username) {
             this.username = username;
             return this;
         }
 
-        public RabbitMQCredentialsBuilder withPassword(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public RabbitMQCredentialsBuilder withPort(int port) {
+        public Builder withPort(int port) {
             this.port = port;
             return this;
         }
