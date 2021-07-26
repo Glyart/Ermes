@@ -3,29 +3,7 @@ package com.glyart.ermes.connections.credentials;
 /**
  * This class represents the credentials to connect to a Redis server
  */
-public class RedisCredentials {
-
-    private final String hostname;
-    private final String password;
-    private final int port;
-
-    private RedisCredentials(String hostname, String password, int port) {
-        this.hostname = hostname;
-        this.password = password;
-        this.port = port;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public int getPort() {
-        return port;
-    }
+public record RedisCredentials(String hostname, String password, int port) {
 
     public static final class Builder {
         private String hostname;

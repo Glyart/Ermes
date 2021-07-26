@@ -22,10 +22,10 @@ public class RabbitMQConnection implements IConnection<RabbitMQMessagingChannel,
     @Override
     public void connect() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(credentials.getHostname());
-        factory.setUsername(credentials.getUsername());
-        factory.setPassword(credentials.getPassword());
-        factory.setPort(credentials.getPort());
+        factory.setHost(credentials.hostname());
+        factory.setUsername(credentials.username());
+        factory.setPassword(credentials.password());
+        factory.setPort(credentials.port());
 
         connection = factory.newConnection();
     }
