@@ -3,35 +3,7 @@ package com.glyart.ermes.rabbitmq;
 /**
  * This class represents the credentials to connect to a RabbitMQ server
  */
-public class RabbitMQCredentials {
-
-    private final String hostname;
-    private final String username;
-    private final String password;
-    private final int port;
-
-    private RabbitMQCredentials(String hostname, String username, String password, int port) {
-        this.hostname = hostname;
-        this.username = username;
-        this.password = password;
-        this.port = port;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public int getPort() {
-        return port;
-    }
+public record RabbitMQCredentials(String hostname, String username, String password, int port) {
 
     public static final class Builder {
         private String hostname;

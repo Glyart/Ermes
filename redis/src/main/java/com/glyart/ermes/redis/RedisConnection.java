@@ -18,7 +18,7 @@ public class RedisConnection implements IConnection<RedisMessagingChannel, Jedis
 
     @Override
     public void connect() {
-        this.pool = new JedisPool(new JedisPoolConfig(), credentials.getHostname(), credentials.getPort(), Protocol.DEFAULT_TIMEOUT, credentials.getPassword());
+        this.pool = new JedisPool(new JedisPoolConfig(), credentials.hostname(), credentials.port(), Protocol.DEFAULT_TIMEOUT, credentials.password());
     }
 
     @Override
