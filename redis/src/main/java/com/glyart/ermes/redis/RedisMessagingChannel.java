@@ -4,13 +4,14 @@ import com.glyart.ermes.common.channels.IDataCompressor;
 import com.glyart.ermes.common.channels.impl.AbstractMessagingChannel;
 import com.google.common.base.Preconditions;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPubSub;
 
 import java.util.Base64;
 
 public class RedisMessagingChannel extends AbstractMessagingChannel<RedisConnection> {
 
-    private Jedis jedis;
+    private JedisPool jedis;
     private JedisPubSub listener;
     private Thread jedisThread;
 
@@ -32,12 +33,12 @@ public class RedisMessagingChannel extends AbstractMessagingChannel<RedisConnect
                     if (!channel.equals(name))
                         return;
 
-                    byte[] data = Base64.getDecoder().decode(channel);
+                    byte[] data = Base64.getDecoder().decode(message);
                     handleMessages(data);
                 }
             };
 
-            jedisThread = new Thread(() -> jedis.subscribe(listener, name));
+            jedisThread = new Thread(() -> jedis.getResource().subscribe(listener, name));
             jedisThread.setName("MessagingChannel-" + name);
             jedisThread.start();
         }
@@ -57,7 +58,9 @@ public class RedisMessagingChannel extends AbstractMessagingChannel<RedisConnect
 
     @Override
     protected void sendData(byte[] data) throws Exception {
-        jedis.publish(name, Base64.getEncoder().encodeToString(data));
+        try (Jedis connection = jedis.getResource()) {
+            connection.publish(name, Base64.getEncoder().encodeToString(data));
+        }
     }
 
 }

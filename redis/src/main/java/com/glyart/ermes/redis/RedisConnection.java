@@ -2,12 +2,11 @@ package com.glyart.ermes.redis;
 
 import com.glyart.ermes.common.channels.IDataCompressor;
 import com.glyart.ermes.common.connections.IConnection;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
-public class RedisConnection implements IConnection<RedisMessagingChannel, Jedis> {
+public class RedisConnection implements IConnection<RedisMessagingChannel, JedisPool> {
 
     private final RedisCredentials credentials;
     private JedisPool pool;
@@ -34,8 +33,8 @@ public class RedisConnection implements IConnection<RedisMessagingChannel, Jedis
     }
 
     @Override
-    public Jedis getConnection() {
-        return pool.getResource();
+    public JedisPool getConnection() {
+        return pool;
     }
 
     public static RedisConnection create(RedisCredentials credentials) {
