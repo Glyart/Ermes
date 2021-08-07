@@ -1,4 +1,4 @@
-package com.glyart.ermes.utils;
+package com.glyart.ermes.common.utils;
 
 import com.glyart.ermes.common.messages.MessageSerializable;
 import com.google.common.base.Preconditions;
